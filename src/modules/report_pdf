@@ -1,0 +1,38 @@
+<?php
+require '../vendor/autoload.php';
+include '../config/config.php';
+
+use Dompdf\Dompdf;
+
+$report = $conn->query("
+    SELECT t.id, c.name AS customer_name, t.total_price, t.rental_start, t.rental_end, t.status
+    FROM transactions t
+    JOIN customers c ON t.customer_id = c.id
+");
+
+$html = '<h3>Laporan Transaksi Rental Kamera</h3>
+<table border="1" width="100%" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th><th>Pelanggan</th><th>Total Harga</th><th>Tanggal Rental</th><th>Status</th>
+        </tr>
+    </thead><tbody>';
+
+while ($row = $report->fetch_assoc()) {
+    $html .= '<tr>
+        <td>' . $row['id'] . '</td>
+        <td>' . $row['customer_name'] . '</td>
+        <td>' . number_format($row['total_price']) . '</td>
+        <td>' . $row['rental_start'] . ' - ' . $row['rental_end'] . '</td>
+        <td>' . $row['status'] . '</td>
+    </tr>';
+}
+
+$html .= '</tbody></table>';
+
+$dompdf = new Dompdf();
+$dompdf->loadHtml($html);
+$dompdf->setPaper('A4', 'landscape');
+$dompdf->render();
+$dompdf->stream("laporan_transaksi.pdf");
+exit;
