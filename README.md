@@ -8,37 +8,6 @@ Website ini dibangun menggunakan PHP Native, Bootstrap 5, dan MySQL. Sistem mend
 - Dashboard admin menampilkan data katalog dan laporan order
 - Tampilan futuristik & mobile-friendly
 
-## Struktur Folder
-
-├── index.php
-├── src/
-│ ├── css/
-│ │ └── style.css
-│ ├── js/
-│ │ └── order.js
-│ ├── img/
-│ │ └── (gambar produk)
-│ ├── config/
-│ │ └── db.php
-│ ├── includes/
-│ │ ├── header.php
-│ │ └── footer.php
-│ └── pages/
-│ ├── admin/
-│ │ ├── dashboard.php
-│ │ ├── item_add.php
-│ │ ├── item_edit.php
-│ │ ├── item_delete.php
-│ │ └── orders_report.php
-│ ├── user/
-│ │ └── catalog.php
-│ └── auth/
-│ ├── login.php
-│ ├── admin_login.php
-│ └── logout.php
-├── sql/
-│ └── database.sql
-
 ## Database
 
 Buat database `kamera_bontang`, lalu import file `sql/database.sql`.
